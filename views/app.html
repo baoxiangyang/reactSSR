@@ -1,0 +1,15 @@
+{% extends './layout.html' %}
+
+{% block header %}
+  {{link}}
+  {{style}}
+  <script type="text/javascript">
+    window.__store = {{store}}
+  </script>
+{% endblock %}
+
+{% block content %}
+<div id="root">{{html}}</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s7DTOhUzFdkSyeiMmVzv1bGqAG2ACseK"></script>
+{{script}}
+{% endblock %}
