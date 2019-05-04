@@ -8,9 +8,10 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const nunjucks = require('nunjucks');
 const favicon = require('koa-favicon');
+
 const reactSSR = require('./dist/server/bundle.js').default;
 const index = require('./routes/index')
-const users = require('./routes/users')
+const api = require('./routes/api')
 
 // error handler
 onerror(app)
@@ -20,7 +21,6 @@ app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 app.use(json())
-app.use(logger())
 
 app.use(favicon(__dirname + '/public/images/logo.ico'));
 app.use(static(__dirname + '/public'));
@@ -39,16 +39,11 @@ app.use(views(__dirname + '/views', {
 }))
 
 // logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+app.use(logger())
 
 // routes
 app.use(index.routes(), index.allowedMethods());
-
+app.use(api.routes(), api.allowedMethods());
 app.use(async (ctx, next) => {
 	const ssrData = await reactSSR(ctx, next);
 	await ctx.render('app', {

@@ -8,7 +8,9 @@ module.exports = merge(baseConfig, {
 	mode: 'development',
 	entry: './src/server.js',
 	target: 'node',
-	externals: [nodeExternals()],
+	externals: [nodeExternals(), {
+	    BMap: '{Overlay:{}}'
+	  }],
 	output: {
     // 输出文件名
     filename: 'bundle.js',

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class Index extends Component {
-	handleClick () {
-		alert(1111)
-	}
 	render() {
     return (
-      <div id="container" onClick={this.handleClick}>
-        这是首页
-      </div>
+      <Link to="/map">前往地图页</Link>
     );
   }
 }
