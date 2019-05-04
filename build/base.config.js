@@ -1,16 +1,15 @@
 'use strict'
 const path = require('path');
+const webpack = require('webpack');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const config = require('../config/index.js')
 
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+const base = {
+  mode: config.isPro ? 'production' : 'development',
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  externals: [{
-    BMap: 'window.BMap'
-  }],
   module: {
     rules: [
       {
@@ -41,7 +40,36 @@ module.exports = {
   plugins: [
     new LoadablePlugin(),
     new MiniCssExtractPlugin({
-      filename: `styles/[name].css`
+      filename: `styles/[name].[chunkhash].css`
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        port: config.port,
+        NODE_ENV: '"production"'
+      }
     })
   ]
 };
+
+//抽离公共代码
+if (config.isPro) {
+  base.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        common: {
+          chunks: 'initial', 
+          minSize: 0, 
+          minChunks: 2 
+        },
+        vendor: {
+          priority: 1, //权重
+          test: /node_modules/,
+          chunks: 'initial',
+          minSize: 0, //大于0个字节
+          minChunks: 2, //在分割之前，这个代码块最小应该被引用的次数
+        }
+      }
+    }
+  }
+}
+module.exports = base;

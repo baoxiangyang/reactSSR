@@ -5,7 +5,7 @@ export const clientAxios = axios.create({
 });
 
 export const serverAxios = req => axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:' + process.env.port,
   headers: {
     cookie: req.header.cookie || ''
   }

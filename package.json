@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node bin/www",
-    "dev": "./node_modules/.bin/nodemon bin/www",
-    "build:dev": "webpack --config ./build/server.config.js & webpack --config ./build/client.config.js"
+    "start": "npm run build:dev & node bin/www",
+    "pro": "npm run build:pro & pm2 start pm2.json",
+    "build:dev": "cross-env NODE_ENV=development webpack --config ./build/server.config.js && cross-env NODE_ENV=development webpack --config ./build/client.config.js",
+    "build:pro": "cross-env NODE_ENV=production webpack --config ./build/server.config.js && cross-env NODE_ENV=production webpack --config ./build/client.config.js"
   },
   "dependencies": {
     "@loadable/component": "^5.9.0",
     "@loadable/server": "^5.9.0",
     "axios": "^0.18.0",
+    "core-js": "^2.6.5",
     "debug": "^2.6.3",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
@@ -37,10 +39,13 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.4.4",
+    "@babel/runtime-corejs2": "^7.4.4",
     "@loadable/babel-plugin": "^5.8.0",
     "@loadable/webpack-plugin": "^5.7.1",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.1",
+    "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "isomorphic-style-loader": "^5.0.1",

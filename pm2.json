@@ -1,0 +1,12 @@
+{
+	"name": "reactmap",
+	"script": "bin/www",
+	"exec_mode": "cluster_mode",
+	"instances": "1",
+	"env": {
+		"NODE_ENV": "production",
+		"PORT": "80"
+	},
+	"out_file": "log/stdout.log",
+	"error_file": "log/stderr.log"
+}

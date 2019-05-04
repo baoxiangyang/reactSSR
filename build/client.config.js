@@ -8,11 +8,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 	CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(baseConfig, {
-	mode: 'development',
 	entry: './src/client.js',
   output: {
     path: path.resolve(__dirname, '../dist/client'),
-    filename: "[name].js",
+    filename: "[name].[chunkhash].js",
     publicPath: '/'
   },
   // 插件

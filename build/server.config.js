@@ -5,12 +5,9 @@ const path = require('path'),
 	baseConfig = require('./base.config.js');
 
 module.exports = merge(baseConfig, {
-	mode: 'development',
 	entry: './src/server.js',
 	target: 'node',
-	externals: [nodeExternals(), {
-	    BMap: '{Overlay:{}}'
-	  }],
+	externals: [nodeExternals()],
 	output: {
     // 输出文件名
     filename: 'bundle.js',
