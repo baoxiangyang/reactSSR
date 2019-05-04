@@ -5,7 +5,7 @@ import Loading from '../components/Loading.jsx';
 import {getMapList} from '../store/mapList/actions.js'
 
 const Index = loadable(
-	() => import('../pages/index.jsx'),
+	() => import('../pages/Index.jsx'),
 	{ fallback: Loading }
 );
 const	Map = loadable(

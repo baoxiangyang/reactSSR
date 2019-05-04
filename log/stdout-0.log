@@ -6,3 +6,14 @@
   <-- GET /map
   xxx GET /map 500 1,003ms -
 项目启动成功: http://127.0.0.1:80
+项目启动成功: http://127.0.0.1:80
+  <-- GET /map
+  <-- GET /api/getMapList
+  --> GET /api/getMapList 200 7ms 496b
+  --> GET /map 200 101ms 1.73kb
+  <-- GET /
+  --> GET / 200 8ms 1.05kb
+  <-- GET /map
+  <-- GET /api/getMapList
+  --> GET /api/getMapList 200 1ms 496b
+  --> GET /map 200 13ms 1.73kb
