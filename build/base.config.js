@@ -43,9 +43,9 @@ const base = {
       filename: `styles/[name].[chunkhash].css`
     }),
     new webpack.DefinePlugin({
-      'process.env': {
-        port: config.port,
-        NODE_ENV: '"production"'
+      "process.env": {
+        "port": JSON.stringify(config.port),
+        "NODE_ENV": JSON.stringify(config.isPro ? 'production' : 'development')
       }
     })
   ]

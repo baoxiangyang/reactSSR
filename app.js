@@ -8,6 +8,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const nunjucks = require('nunjucks');
 const favicon = require('koa-favicon');
+const config = require('./config/index.js');
 
 const reactSSR = require('./dist/server/bundle.js').default;
 const index = require('./routes/index')
@@ -47,7 +48,8 @@ app.use(api.routes(), api.allowedMethods());
 app.use(async (ctx, next) => {
 	const ssrData = await reactSSR(ctx, next);
 	await ctx.render('app', {
-    title: 'Hello Koa 2!',
+    title: 'Hello SSR!',
+    isPro: config.isPro,
     ...ssrData
   })
 })
