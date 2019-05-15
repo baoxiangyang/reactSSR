@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all --parallel dev build:dev:*",
-    "dev": "node --inspect bin/www",
+    "dev": "node bin/www",
     "build:dev:server": "cross-env NODE_ENV=development webpack --config ./build/server.config.js --watch",
-    "build:dev:client": "cross-env NODE_ENV=development webpack --config ./build/client.config.js",
+    "build:dev:client": "cross-env NODE_ENV=development webpack --config ./build/client.config.js --watch",
     "pro": "npm run build:pro & pm2 start pm2.json",
     "build:pro": "cross-env NODE_ENV=production webpack --config ./build/server.config.js && cross-env NODE_ENV=production webpack --config ./build/client.config.js"
   },
