@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = require('../config/index.js')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const base = {
   mode: config.isPro ? 'production' : 'development',
@@ -40,14 +41,19 @@ const base = {
   plugins: [
     new LoadablePlugin(),
     new MiniCssExtractPlugin({
-      filename: `styles/[name].[chunkhash].css`
+      filename: config.isPro ? `styles/[name].[chunkhash].css` : `styles/[name].css`
     }),
     new webpack.DefinePlugin({
       "process.env": {
         "port": JSON.stringify(config.port),
         "NODE_ENV": JSON.stringify(config.isPro ? 'production' : 'development')
       }
-    })
+    }),
+    new HtmlWebpackPlugin({
+      template: './views/app.html',
+      minify: false,
+      filename: path.resolve(__dirname, '../dist/views/app.html'),
+    }),
   ]
 };
 

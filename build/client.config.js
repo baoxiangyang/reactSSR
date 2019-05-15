@@ -11,7 +11,7 @@ module.exports = merge(baseConfig, {
 	entry: './src/client.js',
   output: {
     path: path.resolve(__dirname, '../dist/client'),
-    filename: "[name].[chunkhash].js",
+    filename: baseConfig.mode === 'production' ? "[name].[chunkhash].js" : "[name].js",
     publicPath: '/'
   },
   // 插件

@@ -16,7 +16,9 @@
 {% endblock %}
 
 {% block content %}
-<div id="root">{{html}}</div>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s7DTOhUzFdkSyeiMmVzv1bGqAG2ACseK"></script>
-{{script}}
+<body>
+	<div id="root">{{html}}</div>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s7DTOhUzFdkSyeiMmVzv1bGqAG2ACseK"></script>
+	{{script}}
+</body>
 {% endblock %}

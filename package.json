@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run build:dev & node bin/www",
+    "start": "npm-run-all --parallel dev build:dev:*",
+    "dev": "node --inspect bin/www",
+    "build:dev:server": "cross-env NODE_ENV=development webpack --config ./build/server.config.js --watch",
+    "build:dev:client": "cross-env NODE_ENV=development webpack --config ./build/client.config.js",
     "pro": "npm run build:pro & pm2 start pm2.json",
-    "build:dev": "cross-env NODE_ENV=development webpack --config ./build/server.config.js && cross-env NODE_ENV=development webpack --config ./build/client.config.js",
     "build:pro": "cross-env NODE_ENV=production webpack --config ./build/server.config.js && cross-env NODE_ENV=production webpack --config ./build/client.config.js"
   },
   "dependencies": {
@@ -51,10 +53,14 @@
     "isomorphic-style-loader": "^5.0.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "memory-fs": "^0.4.1",
     "mini-css-extract-plugin": "^0.6.0",
     "nodemon": "^1.8.1",
+    "npm-run-all": "^4.1.5",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.24.4",
     "webpack-merge": "^4.2.1",
     "webpack-node-externals": "^1.7.2"
   }

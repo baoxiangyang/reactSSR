@@ -1,3 +1,4 @@
+const fs = require('fs');
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -9,8 +10,8 @@ const logger = require('koa-logger')
 const nunjucks = require('nunjucks');
 const favicon = require('koa-favicon');
 const config = require('./config/index.js');
-
-const reactSSR = require('./dist/server/bundle.js').default;
+const hot_plugin = require('./hot_plugin.js');
+let reactSSR = require('./dist/server/bundle.js').default;
 const index = require('./routes/index')
 const api = require('./routes/api')
 
@@ -23,6 +24,10 @@ app.use(bodyparser({
 }))
 app.use(json())
 
+//加载客户端热更新模块
+if (!config.isPro) {
+  hot_plugin(app)
+}
 app.use(favicon(__dirname + '/public/images/logo.ico'));
 app.use(static(__dirname + '/public'));
 app.use(static(__dirname + '/dist/client'));
@@ -58,5 +63,19 @@ app.use(async (ctx, next) => {
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
+
+/* 开发环境 ssr 热更新 */
+if (!config.isPro) {
+  fs.watch('./src', {recursive: true}, (eventType, filename) => {
+    Object.keys(require.cache).forEach(item => {
+      if(item.indexOf('\\dist\\server') != -1) {
+       delete require.cache[require.resolve(item)];
+      }
+    });
+    setTimeout(() => {
+      reactSSR = require('./dist/server/bundle.js').default;
+    },1000)
+  });
+}
 
 module.exports = app
