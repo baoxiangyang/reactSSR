@@ -17,24 +17,6 @@ const base = {
         test: /\.js|jsx$/,
         exclude: /(node_modules|bower_components)/,// 屏蔽不需要处理的文件（文件夹）
         loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [{
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.resolve(__dirname, 'public')
-            }
-          }, 'css-loader']
-      },
-      {
-        test: /\.less$/,
-        use: [{
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.resolve(__dirname, 'public')
-            }
-          }, 'css-loader', 'less-loader']
       }
     ]
   },

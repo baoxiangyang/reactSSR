@@ -6,7 +6,7 @@ import '../assets/styles/global.less'
 const App = props => {
   return (
     <div className="app">
-      <header>React SSR</header>
+      <header>噪声系统</header>
       {renderRoutes(props.route.routes)}
     </div>
   )
