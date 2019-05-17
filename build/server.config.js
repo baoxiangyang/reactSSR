@@ -34,7 +34,12 @@ module.exports = merge(baseConfig, {
           options: {
             publicPath: path.resolve(__dirname, 'public')
           }
-        }, 'css-loader', 'less-loader']
+        }, 'css-loader', {
+          loader: "less-loader",
+          options: {
+            javascriptEnabled: true
+          }
+        }]
     }]
 	},
 	// 避免路径丢失

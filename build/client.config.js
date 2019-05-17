@@ -11,7 +11,7 @@ module.exports = merge(baseConfig, {
 	entry: './src/client.js',
   output: {
     path: path.resolve(__dirname, '../dist/client'),
-    filename: baseConfig.mode === 'production' ? "[name].[chunkhash].js" : "[name].js",
+    filename: baseConfig.mode === 'production' ? "[name].[contenthash].js" : "[name].js",
     publicPath: '/'
   },
   module: {
@@ -32,7 +32,12 @@ module.exports = merge(baseConfig, {
             options: {
               publicPath: path.resolve(__dirname, 'public')
             }
-          } : 'style-loader', 'css-loader', 'less-loader']
+          } : 'style-loader', 'css-loader', {
+          loader: "less-loader",
+          options: {
+            javascriptEnabled: true
+          }
+        }]
       }
     ]
   },

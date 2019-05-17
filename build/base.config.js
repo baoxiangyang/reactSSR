@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const base = {
   mode: config.isPro ? 'production' : 'development',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.less']
   },
   module: {
     rules: [
@@ -23,7 +23,7 @@ const base = {
   plugins: [
     new LoadablePlugin(),
     new MiniCssExtractPlugin({
-      filename: config.isPro ? `styles/[name].[chunkhash].css` : `styles/[name].css`
+      filename: config.isPro ? `styles/[name].[contenthash].css` : `styles/[name].css`
     }),
     new webpack.DefinePlugin({
       "process.env": {

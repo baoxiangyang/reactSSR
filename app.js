@@ -25,8 +25,9 @@ app.use(bodyparser({
 app.use(json())
 
 //加载客户端热更新模块
+
 if (!config.isPro) {
-  hot_plugin(app)
+  hot_plugin()(app)
 }
 app.use(favicon(__dirname + '/public/images/logo.ico'));
 app.use(static(__dirname + '/public'));

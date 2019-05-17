@@ -7,12 +7,14 @@
     "dev": "node bin/www",
     "build:dev:server": "cross-env NODE_ENV=development webpack --config ./build/server.config.js --watch",
     "build:dev:client": "cross-env NODE_ENV=development webpack --config ./build/client.config.js",
-    "pro": "npm run build:pro & pm2 start pm2.json",
-    "build:pro": "cross-env NODE_ENV=production webpack --config ./build/server.config.js && cross-env NODE_ENV=production webpack --config ./build/client.config.js"
+    "pro": "cross-env NODE_ENV=production node bin/www",
+    "build:pro": "npm run build && npm run pro",
+    "build": "cross-env NODE_ENV=production webpack --config ./build/server.config.js & cross-env NODE_ENV=production webpack --config ./build/client.config.js"
   },
   "dependencies": {
     "@loadable/component": "^5.9.0",
     "@loadable/server": "^5.9.0",
+    "antd": "^3.18.1",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "debug": "^2.6.3",
@@ -46,6 +48,7 @@
     "@loadable/babel-plugin": "^5.8.0",
     "@loadable/webpack-plugin": "^5.7.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-import": "^1.11.0",
     "clean-webpack-plugin": "^2.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
@@ -57,6 +60,7 @@
     "mini-css-extract-plugin": "^0.6.0",
     "nodemon": "^1.8.1",
     "npm-run-all": "^4.1.5",
+    "open": "^6.3.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",

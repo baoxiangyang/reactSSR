@@ -9,4 +9,4 @@
 ### 启动项目
 
 1. 第一步 npm install
-2. 第二部 npm start
+2. 第二部 npm run pro
